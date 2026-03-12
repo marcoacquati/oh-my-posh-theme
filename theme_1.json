@@ -1,0 +1,120 @@
+{
+	"$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+	"palette": {
+		"blush": "#CB2A7A",
+		"tan": "#FF4C4C",
+		"plum": "#BE57B2",
+		"salmon": "#FCA17D",
+		"mint": "#00BF99",
+		"sky_blue": "#149FDF",
+		"pantone_green": "#66CC33",
+		"pnpm_yellow": "#F9AD00",
+		"python_yellow": "#FFD43B",
+		"white": "#FFFFFF"
+	},
+	"blocks": [
+		{
+			"type": "prompt",
+			"alignment": "left",
+			"segments": [
+				{
+					"type": "os",
+					"style": "plain",
+					"foreground": "p:mint",
+					"template": "{{ .Icon }}"
+				},
+				{
+					"type": "path",
+					"style": "plain",
+					"foreground": "p:mint",
+					"template": " {{ .Path }} ",
+					"properties": {
+						"folder_separator_icon": "/",
+						"style": "full"
+					}
+				},
+				{
+					"type": "git",
+					"style": "plain",
+					"foreground": "p:sky_blue",
+					"template": "| {{ .UpstreamIcon }}  {{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} \ueb4b {{ .StashCount }}{{ end }} ",
+					"properties": {
+						"fetch_status": true,
+						"fetch_upstream_icon": true,
+						"branch_template": "{{ Branch }}"
+					}
+				},
+				{
+					"type": "executiontime",
+					"style": "plain",
+					"foreground": "p:white",
+					"template": "{{ .FormattedMs }} ",
+					"properties": {
+						"threshold": 500,
+						"style": "austin",
+						"always_enabled": true
+					}
+				},
+				{
+					"type": "status",
+					"style": "plain",
+					"foreground": "p:white",
+					"foreground_templates": ["{{ if eq .Code 0 }}p:mint{{ end }}", "{{ if ne .Code 0 }}p:tan{{ end }}"],
+					"template": "{{ if eq .Code 0 }}\uf00c{{ else }}\uf00d{{ end }}",
+					"properties": {
+						"always_enabled": true
+					}
+				}
+			]
+		},
+		{
+			"type": "prompt",
+			"alignment": "right",
+			"segments": [
+				{
+					"type": "node",
+					"style": "plain",
+					"foreground": "p:pantone_green",
+					"template": "{{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}\ue718 {{ .Full }} ",
+					"properties": {
+						"display_mode": "files",
+						"fetch_package_manager": true,
+						"fetch_version": true,
+						"npm_icon": "<p:tan>\ue616 npm</> ",
+						"pnpm_icon": "<p:pnpm_yellow>\udb80\udec1 pnpm</> ",
+						"yarn_icon": "<p:sky_blue>\ue6a7 yarn</> "
+					}
+				},
+				{
+					"type": "python",
+					"style": "plain",
+					"foreground": "p:python_yellow",
+					"template": "\ue235 {{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }} (.venv) {{ end }}{{ .Full }}{{ end }} ",
+					"properties": {
+						"display_mode": "files"
+					}
+				}
+			]
+		},
+		{
+			"type": "prompt",
+			"alignment": "left",
+			"newline": true,
+			"segments": [
+				{
+					"type": "root",
+					"style": "plain",
+					"foreground": "p:blush",
+					"template": "\ue3bf "
+				},
+				{
+					"type": "text",
+					"style": "plain",
+					"foreground": "p:blush",
+					"template": "# "
+				}
+			]
+		}
+	],
+	"version": 3
+}
